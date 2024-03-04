@@ -4,7 +4,6 @@ import { Hono } from "hono";
 import { sign, verify } from "hono/jwt";
 import { signinInput, signupInput } from "@ganesh-revadi/medium-commons";
 
-
 // Create the main Hono app
 export const userRouter = new Hono<{
   Bindings: {
@@ -13,8 +12,6 @@ export const userRouter = new Hono<{
   };
 }>();
 
-
-
 userRouter.post("/signup", async (c) => {
   const prisma = new PrismaClient({
     datasourceUrl: c.env?.DATABASE_URL,
@@ -22,13 +19,13 @@ userRouter.post("/signup", async (c) => {
 
   const body = await c.req.json();
 
-  const { success } = signupInput.safeParse(body)
+  const { success } = signupInput.safeParse(body);
 
   if (!success) {
-    c.status(411)
+    c.status(411);
     return c.json({
-      message: "Incorrect Inputs"
-    })
+      message: "Incorrect Inputs",
+    });
   }
 
   try {
@@ -40,7 +37,7 @@ userRouter.post("/signup", async (c) => {
       },
     });
     const jwt = await sign({ id: user.id }, c.env.JWT_SECRET);
-    return c.json({ jwt });
+    return c.text(jwt);
   } catch (e) {
     c.status(403);
     return c.json({ error: "error while signing up" });
@@ -54,8 +51,8 @@ userRouter.get("/get", async (c) => {
 
   const users = await prisma.user.findMany();
 
-  return c.json({ users })
-})
+  return c.json({ users });
+});
 
 userRouter.post("/signin", async (c) => {
   const prisma = new PrismaClient({
@@ -63,13 +60,13 @@ userRouter.post("/signin", async (c) => {
   }).$extends(withAccelerate());
 
   const body = await c.req.json();
-  const { success } = signupInput.safeParse(body)
+  const { success } = signupInput.safeParse(body);
 
   if (!success) {
-    c.status(411)
+    c.status(411);
     return c.json({
-      message: "Incorrect Inputs"
-    })
+      message: "Incorrect Inputs",
+    });
   }
   const user = await prisma.user.findUnique({
     where: {
@@ -85,4 +82,3 @@ userRouter.post("/signin", async (c) => {
   const jwt = await sign({ id: user.id }, c.env.JWT_SECRET);
   return c.json({ jwt });
 });
-
