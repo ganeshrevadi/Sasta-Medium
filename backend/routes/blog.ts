@@ -95,6 +95,26 @@ blogRouter.put("/", async (c) => {
   });
 });
 
+
+blogRouter.delete("/delete", async (c) => {
+  const body = await c.req.json();
+  const prisma = new PrismaClient({
+    datasourceUrl: c.env.DATABASE_URL,
+  }).$extends(withAccelerate());
+
+  await prisma.post.delete({
+    where: {
+      id: body.id,
+    },
+  });
+
+  return c.json({
+    message: "Blog deleted"
+  });
+
+
+})
+
 // Todo: add pagination
 blogRouter.get("/bulk", async (c) => {
   const prisma = new PrismaClient({
