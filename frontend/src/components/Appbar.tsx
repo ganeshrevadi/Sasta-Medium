@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 export const Appbar = () => {
   return <div className="border-b flex justify-between px-10 py-4">
     <Link to={'/blogs'} className="flex flex-col font-bold justify-center cursor-pointer">
-      Sasta Medium
+      Medium
     </Link>
     <div>
       <Link to={`/publish`}>
