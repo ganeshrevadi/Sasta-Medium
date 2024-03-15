@@ -4,6 +4,7 @@ import { signupInput } from "@ganesh-revadi/medium-commons";
 import axios from "axios";
 import { BACKEND_URL } from "../config";
 
+
 export default function Form({ type }: { type: "signup" | "signin" }) {
   const navigate = useNavigate();
   const [postInputs, setPostInputs] = useState<signupInput>({
@@ -11,6 +12,7 @@ export default function Form({ type }: { type: "signup" | "signin" }) {
     username: "",
     password: ""
   });
+
 
   async function sendRequest() {
     try {
@@ -63,6 +65,7 @@ export default function Form({ type }: { type: "signup" | "signin" }) {
     </div>
   </div>
 }
+
 
 interface LabelledInputType {
   label: string;
