@@ -20,7 +20,6 @@ export default function Form({ type }: { type: "signup" | "signin" }) {
       const jwt = response.data;
       localStorage.setItem("token", jwt);
       navigate("/blogs", { state: { name: postInputs.username } });
-      console.log("name r: ", postInputs.name)
     } catch (e) {
       alert("Error while signing up")
       // alert the user here that the request failed
