@@ -1,16 +1,17 @@
 import { Appbar } from "../components/Appbar"
 import axios from "axios";
 import { BACKEND_URL } from "../config";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { ChangeEvent, useState } from "react";
 
 export const Publish = () => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const navigate = useNavigate();
+    const location = useLocation();
 
     return <div>
-        <Appbar />
+        <Appbar iconName={location.state.name} />
         <div className="flex justify-center w-full pt-8"> 
             <div className="max-w-screen-lg w-full">
                 <input onChange={(e) => {
