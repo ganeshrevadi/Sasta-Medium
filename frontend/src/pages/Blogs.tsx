@@ -2,13 +2,14 @@ import { Appbar } from "../components/Appbar"
 import { BlogCard } from "../components/BlogCard"
 import { BlogSkeleton } from "../components/BlogSkeleton";
 import { useBlogs } from "../hooks";
+import { useLocation } from "react-router-dom";
 
 export const Blogs = () => {
   const { loading, blogs } = useBlogs();
-
+  const location = useLocation();
   if (loading) {
     return <div>
-      <Appbar />
+      <Appbar iconName={location.state.name} />
       <div className="flex justify-center">
         <div>
           <BlogSkeleton />
@@ -22,7 +23,7 @@ export const Blogs = () => {
   }
 
   return <div>
-    <Appbar />
+    <Appbar iconName={location.state.name} />
     <div className="flex justify-center">
       <div>
         {blogs.map(blog => <BlogCard

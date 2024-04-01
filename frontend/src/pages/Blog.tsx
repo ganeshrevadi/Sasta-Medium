@@ -2,18 +2,19 @@ import { Appbar } from "../components/Appbar";
 import { FullBlog } from "../components/FullBlog";
 import { Spinner } from "../components/Spinner";
 import { useBlog } from "../hooks";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 
 // atomFamilies/selectorFamilies
 export const Blog = () => {
   const { id } = useParams();
+  const location = useLocation()
   const { loading, blog } = useBlog({
     id: id || ""
   });
 
   if (loading || !blog) {
     return <div>
-      <Appbar />
+      <Appbar iconName={location.state.name}/>
 
       <div className="h-screen flex flex-col justify-center">
 
