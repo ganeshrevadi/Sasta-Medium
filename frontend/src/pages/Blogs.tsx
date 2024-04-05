@@ -2,14 +2,15 @@ import { Appbar } from "../components/Appbar"
 import { BlogCard } from "../components/BlogCard"
 import { BlogSkeleton } from "../components/BlogSkeleton";
 import { useBlogs } from "../hooks";
-import { useLocation } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { nameAtom } from "../store/atoms/nameAtom";
 
 export const Blogs = () => {
   const { loading, blogs } = useBlogs();
-  const location = useLocation();
+  const username = useRecoilValue(nameAtom)
   if (loading) {
     return <div>
-      <Appbar iconName={location.state.name} />
+      <Appbar iconName={username} />
       <div className="flex justify-center">
         <div>
           <BlogSkeleton />
@@ -23,7 +24,7 @@ export const Blogs = () => {
   }
 
   return <div>
-    <Appbar iconName={location.state.name} />
+    <Appbar iconName={username} />
     <div className="flex justify-center">
       <div>
         {blogs.map(blog => <BlogCard

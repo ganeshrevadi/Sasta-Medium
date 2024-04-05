@@ -2,7 +2,9 @@ import { Appbar } from "../components/Appbar";
 import { FullBlog } from "../components/FullBlog";
 import { Spinner } from "../components/Spinner";
 import { useBlog } from "../hooks";
-import { useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { nameAtom } from "../store/atoms/nameAtom";
 
 // atomFamilies/selectorFamilies
 export const Blog = () => {
@@ -11,9 +13,11 @@ export const Blog = () => {
     id: id || ""
   });
 
+  const username = useRecoilValue(nameAtom)
+
   if (loading || !blog) {
     return <div>
-      <Appbar iconName="M"/>
+      <Appbar iconName={username} />
 
       <div className="h-screen flex flex-col justify-center">
 

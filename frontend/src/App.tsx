@@ -4,12 +4,13 @@ import Signup from './pages/Signup'
 import { Blogs } from './pages/Blogs'
 import { Blog } from './pages/Blog'
 import { Publish } from './pages/Publish'
+import { RecoilRoot } from 'recoil'
 
 
 function App() {
 
   return (
-    <>
+    <RecoilRoot>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Signup />} />
@@ -20,7 +21,7 @@ function App() {
           <Route path="/publish" element={<Publish />} />
         </Routes>
       </BrowserRouter>
-    </>
+    </RecoilRoot>
   )
 }
 

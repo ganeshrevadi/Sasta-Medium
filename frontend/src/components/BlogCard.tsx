@@ -12,7 +12,7 @@ export const BlogCard = ({
   authorName,
   title,
   content,
-  publishedDate
+  publishedDate,
 }: BlogCardProps) => {
   return <Link to={`/blog/${id}`}>
     <div className="p-4 border-b border-slate-200 pb-4 w-screen max-w-screen-md cursor-pointer">

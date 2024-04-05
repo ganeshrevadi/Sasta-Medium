@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { signupInput } from "@ganesh-revadi/medium-commons";
 import axios from "axios";
 import { BACKEND_URL } from "../config";
+import { useSetRecoilState } from 'recoil'
+import { nameAtom } from "../store/atoms/nameAtom";
 
 
 export default function Form({ type }: { type: "signup" | "signin" }) {
@@ -12,6 +14,7 @@ export default function Form({ type }: { type: "signup" | "signin" }) {
     username: "",
     password: ""
   });
+  const setusername = useSetRecoilState(nameAtom)
 
 
   async function sendRequest() {
@@ -52,6 +55,8 @@ export default function Form({ type }: { type: "signup" | "signin" }) {
               ...postInputs,
               username: e.target.value
             })
+            setusername(e.target.value)
+
           }} />
           <LabelledInput label="Password" type={"password"} placeholder="123456" onChange={(e) => {
             setPostInputs({

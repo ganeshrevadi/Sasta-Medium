@@ -1,11 +1,14 @@
 import { Blog } from "../hooks"
 import { Appbar } from "./Appbar"
 import { Avatar } from "./BlogCard"
+import { useRecoilValue } from "recoil"
+import { nameAtom } from "../store/atoms/nameAtom"
 
 export const FullBlog = ({ blog }: { blog: Blog }) => {
+  const username = useRecoilValue(nameAtom)
 
   return <div>
-    <Appbar iconName={blog.author.name} />
+    <Appbar iconName={username} />
     <div className="flex justify-center">
       <div className="grid grid-cols-12 px-10 w-full pt-200 max-w-screen-xl pt-12">
         <div className="col-span-8">
